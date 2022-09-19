@@ -3,7 +3,7 @@ import { Entry } from "../../interfaces";
 
 type EntriesActionType =
   | { type: "CREATE ENTRY"; payload: Entry }
-  | { type: "DELETE ENTRY " };
+  | { type: "UPDATED ENTRY"; payload: Entry };
 
 export const entriesReducer = (
   state: EntriesState,
@@ -14,6 +14,17 @@ export const entriesReducer = (
       return {
         ...state,
         entries: [...state.entries, action.payload],
+      };
+    case "UPDATED ENTRY":
+      return {
+        ...state,
+        entries: state.entries.map((entry) => {
+          if (entry._id === action.payload._id) {
+            entry.status === action.payload.status;
+            entry.description === action.payload.description;
+          }
+          return entry;
+        }),
       };
     default:
       return state;
