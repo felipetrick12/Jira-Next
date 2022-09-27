@@ -12,6 +12,7 @@ const entrySchema = new Schema({
   status: {
     type: String,
     enum: { values: ["pending", "in-progress", "finished"] },
+    default: "pending",
   },
 });
 
